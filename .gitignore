@@ -1,0 +1,8 @@
+lib/
+node_modules/
+bower_components/
+.nyc_output/
+coverage/
+*.log
+.idea/
+.DS_Store

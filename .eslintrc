@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "indent": ["error", 4, {
+      "SwitchCase": 1
+    }],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": [
+        "gulpfile.babel.js",
+        "**/*.spec.js"
+      ]
+    }]
+  },
+  "env": {
+    "node": true
+  }
+}
