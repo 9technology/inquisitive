@@ -1,8 +1,9 @@
-lib/
-node_modules/
-bower_components/
 .nyc_output/
 coverage/
+dist/
+lib/
+logs/
+node_modules/
+
 *.log
-.idea/
 .DS_Store

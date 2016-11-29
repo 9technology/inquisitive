@@ -1,10 +1,9 @@
-.babelrc
-.editorconfig
-.eslintrc
+.nyc_output/
+coverage/
+logs/
+test/
+
 .gitignore
-.nyc_output
 .travis.yml
-yarn.lock
-gulpfile.babel.js
-coverage
-test
+.npmignore
+*.log
