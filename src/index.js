@@ -40,6 +40,7 @@ export default (module, defaults) => {
                     const time = ms(Date.now() - start);
                     status(`Done in ${time}.`);
                     spinner.succeed();
+                    return answers;
                 }, (err) => {
                     status(err.message);
                     spinner.fail();

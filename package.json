@@ -9,7 +9,7 @@
     "build": "gulp build",
     "prepublish": "npm run build"
   },
-  "author": "Christopher Turner <cturner@nine.com.au>",
+  "author": "9Technology <opensource@nine.com.au>",
   "license": "BSD-3-Clause",
   "dependencies": {
     "any-promise": "^1.3.0",
@@ -39,6 +39,9 @@
     "proxyquire": "^1.7.10",
     "run-sequence": "^1.2.2",
     "sinon": "^1.17.6"
+  },
+  "engines": {
+    "node": ">=4"
   },
   "ava": {
     "require": [
