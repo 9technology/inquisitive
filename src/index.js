@@ -15,7 +15,7 @@ export default (module, defaults) => {
     const prompt = (q) => {
         const val = argv[q.name];
         // add cli args as default
-        if (val !== undefined) q.default = val;
+        if (val !== undefined) q.default = val; // eslint-disable-line no-param-reassign
         questions.push(q);
     };
 
@@ -27,7 +27,9 @@ export default (module, defaults) => {
         run() {
             return inquire(questions).then((answers) => {
                 const spinner = ora();
-                const status = (text) => spinner.text = text;
+                const status = (text) => {
+                    spinner.text = text;
+                };
 
                 spinner.color = 'dim';
                 spinner.start();
