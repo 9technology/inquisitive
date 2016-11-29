@@ -19,7 +19,6 @@ export default (module) => {
             // run options
             const options = defaults(opts, {
                 args: true,
-                module: inquire,
                 spinner: true,
                 time: true,
             });
@@ -46,7 +45,7 @@ export default (module) => {
             // run middleware and add action handlers to mware
             stack.forEach(fn => middleware.use(fn(prompt)));
 
-            return options.module(questions).then((answers) => {
+            return inquire(questions).then((answers) => {
                 const spinner = options.spinner ? ora() : null;
                 const status = (text) => {
                     if (spinner) {
