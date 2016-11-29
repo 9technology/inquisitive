@@ -27,7 +27,9 @@ const oraTextSet = sandbox.stub();
 Object.defineProperty(oraInstance, 'text', { set: oraTextSet });
 const ora = sandbox.stub().returns(oraInstance);
 
-const inquisitive = proxy('../src', { inquirer, yargs, ora }).default;
+const ms = sandbox.stub();
+
+const inquisitive = proxy('../src', { inquirer, yargs, ora, ms }).default;
 
 test.beforeEach(() => {
     sandbox.reset();
@@ -49,22 +51,24 @@ test('instance has run method', (t) => {
 });
 
 test('uses default prompt module', async (t) => {
-    const inq = inquisitive();
+    inquisitive();
     t.truthy(createPromptModule.called);
 });
 
 test('uses defaults from yargs', async (t) => {
     const inq = inquisitive();
+    await inq.run();
     t.truthy(argvGet.called);
 });
 
 test('doesn\'t use default prompt module', async (t) => {
-    const inq = inquisitive({});
+    inquisitive({});
     t.truthy(createPromptModule.notCalled);
 });
 
 test('doesn\'t use defaults from yargs', async (t) => {
-    const inq = inquisitive(null, {});
+    const inq = inquisitive();
+    await inq.run({ args: false });
     t.truthy(argvGet.notCalled);
 });
 
@@ -75,7 +79,7 @@ test('givens middleware prompt', async (t) => {
     await inq.run();
 
     t.truthy(middleware.calledWithMatch(
-        sinon.match.func
+        sinon.match.func,
     ));
 });
 
@@ -88,16 +92,19 @@ test('prompt adds question to inquirer', async (t) => {
     inq.use(middleware);
     await inq.run();
 
-    t.deepEqual(inquire.firstCall.args[0], [ question ]);
+    t.deepEqual(inquire.firstCall.args[0], [question]);
 });
 
 test('sets default value', async (t) => {
-    const inq = inquisitive(null, { foo: 'bar' });
+    const inq = inquisitive();
     const question = { name: 'foo' };
     const middleware = (prompt) => {
         prompt(question);
     };
     inq.use(middleware);
+
+    argvGet.returns({ foo: 'bar' });
+
     await inq.run();
 
     t.deepEqual(inquire.firstCall.args[0][0].default, 'bar');
@@ -116,7 +123,7 @@ test('passes answers to middleware', async (t) => {
 
     t.truthy(middleware.calledWithMatch(
         sinon.match.same(answers),
-        sinon.match.func
+        sinon.match.func,
     ));
 });
 
@@ -166,4 +173,46 @@ test('rejects with same middleware error', async (t) => {
     } catch (err) {
         t.is(err, error);
     }
+});
+
+test('does not start spinner if disabled', async (t) => {
+    const inq = inquisitive();
+    await inq.run({
+        spinner: false,
+    });
+    t.truthy(oraStart.notCalled);
+});
+
+test('does not fail spinner if disabled', async (t) => {
+    const inq = inquisitive();
+    inq.use(() => () => {
+        throw new Error();
+    });
+    try {
+        await inq.run({
+            spinner: false,
+        });
+        t.fail();
+    } catch (err) {
+        t.truthy(oraFailed.notCalled);
+    }
+});
+
+test('does not update status spinner if disabled', async (t) => {
+    const inq = inquisitive();
+    inq.use(() => (a, status) => {
+        status('foo');
+    });
+    await inq.run({
+        spinner: false,
+    });
+    t.truthy(oraTextSet.neverCalledWith('foo'));
+});
+
+test('does not feedback time if disabled', async (t) => {
+    const inq = inquisitive();
+    await inq.run({
+        time: false,
+    });
+    t.truthy(ms.notCalled);
 });
