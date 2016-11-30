@@ -3,7 +3,11 @@ coverage/
 logs/
 test/
 
+.babelrc
+.editorconfig
+.eslintrc
 .gitignore
 .travis.yml
 .npmignore
 *.log
+gulpfile.babel.js
