@@ -4,10 +4,8 @@
   "description": "Inquirer middleware engine.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test ava",
-    "coverage": "nyc --reporter=text --reporter=lcov npm test",
-    "build": "gulp build",
-    "prepublish": "npm run build"
+    "test": "cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov ava",
+    "prepublish": "gulp build"
   },
   "author": "9Technology <opensource@nine.com.au>",
   "license": "BSD-3-Clause",
