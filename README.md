@@ -123,6 +123,7 @@ inq.run({
 Inquisitive has the ability to read args from the terminal and set them as the defaults for questions. This is a convenience options enabled by default.
 
 _cli.js_
+
 ```javascript
 inq.use((prompt) => {
     prompt({
