@@ -7,7 +7,7 @@
 ## Example
 
 ```javascript
-import 'babel-register'; // enable async/await
+import '@babel/register'; // enable async/await
 import inquisitive from 'inquisitive';
 import delay from 'delay';
 
@@ -91,7 +91,7 @@ See inquirer [Questions](https://www.npmjs.com/package/inquirer#questions).
 
 Once [inquirer](https://www.npmjs.com/package/inquirer) has complete the answers it will run through the answer handlers. To give a handler to inquisitive just return an async function from the middleware function.
 
-Answer handler functions take 3 arguments, `answers`, `status` and `next`. 
+Answer handler functions take 3 arguments, `answers`, `status` and `next`.
 
 ```javascript
 inq.use((prompt) => {
