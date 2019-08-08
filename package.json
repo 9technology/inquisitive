@@ -41,7 +41,6 @@
     "gulp-babel": "^8.0.0",
     "nyc": "^14.1.1",
     "proxyquire": "^1.7.10",
-    "run-sequence": "^1.2.2",
     "sinon": "^1.17.6"
   },
   "engines": {

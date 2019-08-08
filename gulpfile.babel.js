@@ -1,7 +1,6 @@
 /* eslint-disable arrow-body-style */
 import gulp from 'gulp';
 import babel from 'gulp-babel';
-import sequence from 'run-sequence';
 import del from 'del';
 
 
