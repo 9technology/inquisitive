@@ -1,7 +1,13 @@
 {
   "name": "inquisitive",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "description": "Inquirer middleware engine.",
+  "keywords": [
+    "prompt",
+    "cli",
+    "inquirer",
+    "middleware"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov ava",
@@ -59,5 +65,9 @@
     "all": true,
     "sourceMap": false,
     "instrument": false
+  },
+  "repository": {
+    "url": "git@github.com:9technology/inquisitive.git",
+    "type": "git"
   }
 }
